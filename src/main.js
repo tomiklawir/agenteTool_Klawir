@@ -3,13 +3,15 @@ import { Ollama } from "@llamaindex/ollama";
 import { z } from "zod";
 import { empezarChat } from "./lib/cli-chat.js";
 import { Estudiantes } from "./lib/estudiantes.js";
+import {
+    buscarPorNombre,
+    buscarPorApellido,
+    agregarEstudiante,
+    listarEstudiantes
+} from "./ejemplo-alumnos-tools.js";
 
 // Configuración
 const DEBUG = true;
-
-// Instancia de la clase Estudiantes
-const estudiantes = new Estudiantes();
-estudiantes.cargarEstudiantesDesdeJson();
 
 // System prompt básico
 const systemPrompt = `
@@ -31,57 +33,9 @@ const ollamaLLM = new Ollama({
 });
 
 
-// TODO: Implementar la Tool para buscar por nombre
-const buscarPorNombreTool = tool({
-    name: "buscarPorNombre",
-    description: "Usa esta función para encontrar estudiantes por su nombre",
-    parameters: z.object({
-        nombre: z.string().describe("El nombre del estudiante a buscar"),
-    }),
-    execute: ({ nombre }) => {
-        // Tu código aquí
-    },
-});
-
-// TODO: Implementar la Tool para buscar por apellido
-const buscarPorApellidoTool = tool({
-    name: "buscarPorApellido",
-    description: "Usa esta función para encontrar estudiantes por su apellido",
-    parameters: z.object({
-        apellido: z.string().describe("El apellido del estudiante a buscar"),
-    }),
-    execute: ({ apellido }) => {
-       return;
-    },
-});
-
-// TODO: Implementar la Tool para agregar estudiante
-const agregarEstudianteTool = tool({
-    name: "agregarEstudiante",
-    description: "Usa esta función para agregar un nuevo estudiante",
-    parameters: z.object({
-        nombre: z.string().describe("El nombre del estudiante"),
-        apellido: z.string().describe("El apellido del estudiante"),
-        curso: z.string().describe("El curso del estudiante (ej: 4A, 4B, 5A)"),
-    }),
-    execute: ({ nombre, apellido, curso }) => {
-        return;
-    },
-});
-
-// TODO: Implementar la Tool para listar estudiantes
-const listarEstudiantesTool = tool({
-    name: "listarEstudiantes",
-    description: "Usa esta función para mostrar todos los estudiantes",
-    parameters: z.object({}),
-    execute: () => {
-        return;
-    },
-});
-
 // Configuración del agente
 const elAgente = agent({
-    tools: [buscarPorNombreTool, buscarPorApellidoTool, agregarEstudianteTool, listarEstudiantesTool],
+    tools: [buscarPorNombre, buscarPorApellido, agregarEstudiante, listarEstudiantes],
     llm: ollamaLLM,
     verbose: DEBUG,
     systemPrompt: systemPrompt,
