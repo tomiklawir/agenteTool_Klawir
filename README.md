@@ -1,38 +1,69 @@
-# ejemplo-llm-1
+# Entregable: Sistema de Gestión de Estudiantes con LLM Tools
 
-## Requisitos previos
+Este proyecto es un entregable para implementar un sistema de gestión de estudiantes utilizando LLMs (Large Language Models) y Tools.
+
+## 📚 Requisitos Previos
 
 - Node.js >= 18
-- Tener [Ollama](https://ollama.com/) instalado y corriendo en tu máquina.
-- Descargar el modelo que quieras usar, por ejemplo:  
-  ```
-  ollama run gemma3:1b
-  ```
+- [Ollama](https://ollama.com/) instalado y corriendo
+- Modelo qwen3:1.7b instalado
 
-## Instalación
+## 🛠 Instalación
 
-1. Clona este repositorio o descarga los archivos.
-2. Instala las dependencias:
-   ```
-   npm install
-   ```
-
-## Uso
-
-Para iniciar el bot de ejemplo ejecuta:
-
-```
-npm run ejemplo
+1. Instala las dependencias:
+```bash
+npm install
 ```
 
-Luego escribe tus preguntas en la consola.  
-Para salir, escribe `salir`.
-
-
-## Cambiar el modelo
-
-Puedes cambiar el modelo editando la línea correspondiente en `ejemplo.js`:
-
-```js
-model: "gemma3:1b" // Cambia por "mistral:7b", "llama2:7b", etc.
+2. Asegúrate de tener Ollama corriendo y el modelo instalado:
+```bash
+ollama run qwen3:1.7b
 ```
+
+## 🎯 Tu Tarea
+
+Debes implementar las siguientes funcionalidades:
+
+1. En `src/lib/estudiantes.js`:
+   - Método `agregarEstudiante(nombre, apellido, curso)`
+   - Método `buscarEstudiantePorNombre(nombre)`
+   - Método `buscarEstudiantePorApellido(apellido)`
+   - Método `listarEstudiantes()`
+
+2. En `src/ejemplo-alumnos-tools.js`:
+   - Tool `buscarPorNombre`
+   - Tool `buscarPorApellido`
+   - Tool `agregarEstudiante`
+   - Tool `listarEstudiantes`
+
+## 💡 Ayuda
+
+- Cada método y Tool tiene comentarios TODO indicando dónde implementar el código
+- Revisa la documentación de llamaindex para entender cómo funcionan las Tools
+- Utiliza la clase `Estudiantes` para manejar los datos
+- Las Tools deben usar los métodos de la clase `Estudiantes`
+
+## 🚀 Para Ejecutar
+
+```bash
+npm start
+```
+
+## 📝 Notas
+
+- El código base ya incluye:
+  - Interfaz CLI funcional
+  - Formateo de respuestas
+  - Manejo básico de archivos
+  - Estructura del proyecto
+
+- No modifiques:
+  - La estructura de los archivos
+  - Los nombres de los métodos/Tools
+  - Los parámetros definidos
+
+## 📚 Recursos
+
+- [Documentación de LlamaIndex](https://docs.llamaindex.ai/)
+- [Documentación de Zod](https://zod.dev/)
+- [Ejemplos de Tools](https://docs.llamaindex.ai/en/stable/examples/tools/)
